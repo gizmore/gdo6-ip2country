@@ -3,7 +3,7 @@ namespace GDO\IP2Country;
 
 use GDO\DB\GDO;
 use GDO\Type\GDT_Int;
-use GDO\Country\Country;
+use GDO\Country\GDO_Country;
 use GDO\Country\GDT_Country;
 use GDO\DB\GDT_Index;
 /**
@@ -16,7 +16,7 @@ use GDO\DB\GDT_Index;
  * @see Country
  * 
  */
-final class IPCountry extends GDO
+final class GDO_IPCountry extends GDO
 {
 	###########
 	### GDO ###
@@ -52,13 +52,13 @@ final class IPCountry extends GDO
 	/**
 	 * 
 	 * @param string $ip
-	 * @return Country
+	 * @return GDO_Country
 	 */
 	public static function detect(string $ip)
 	{
 		if ($iso = self::detectISO($ip))
 		{
-			return Country::getById($iso);
+		    return GDO_Country::getById($iso);
 		}
 	}
 }

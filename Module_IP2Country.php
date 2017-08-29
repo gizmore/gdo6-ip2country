@@ -1,10 +1,10 @@
 <?php
 namespace GDO\IP2Country;
 
-use GDO\Core\Module;
+use GDO\Core\GDO_Module;
 use GDO\Type\GDT_Checkbox;
 use GDO\UI\GDT_Link;
-use GDO\User\User;
+use GDO\User\GDO_User;
 /**
  * IP2Country detection.
  * 
@@ -13,14 +13,14 @@ use GDO\User\User;
  * @version 5.0
  *
  */
-final class Module_IP2Country extends Module
+final class Module_IP2Country extends GDO_Module
 {
 	public $module_priority = 80; # Install and load late :)
 	
 	##############
 	### Module ###
 	##############
-	public function getClasses() { return ['GDO\IP2Country\IPCountry']; }
+	public function getClasses() { return ['GDO\IP2Country\GDO_IPCountry']; }
 	public function onLoadLanguage() { $this->loadLanguage('lang/ip2country'); }
 	public function href_administrate_module() { return href('IP2Country', 'InstallIP2C'); }
 	
@@ -39,18 +39,18 @@ final class Module_IP2Country extends Module
 	#############
 	### Hooks ###
 	#############
-	public function hookUserActivated(User $user)
+	public function hookUserActivated(GDO_User $user)
 	{
 		if ($this->cfgAutodetectSignup())
 		{
 			$this->autodetectForUser($user);
 		}
 	}
-	private static function autodetectForUser(User $user)
+	private static function autodetectForUser(GDO_User $user)
 	{
 		if (!$user->getCountryISO())
 		{
-			$user->saveVar('user_country', IPCountry::detectISO($user->getRegisterIP()));
+		    $user->saveVar('user_country', GDO_IPCountry::detectISO($user->getRegisterIP()));
 		}
 	}
 }

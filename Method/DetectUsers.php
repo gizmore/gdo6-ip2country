@@ -5,8 +5,8 @@ use GDO\Form\GDT_AntiCSRF;
 use GDO\Form\GDT_Form;
 use GDO\Form\GDT_Submit;
 use GDO\Form\MethodForm;
-use GDO\IP2Country\IPCountry;
-use GDO\User\User;
+use GDO\IP2Country\GDO_IPCountry;
+use GDO\User\GDO_User;
 
 final class DetectUsers extends MethodForm
 {
@@ -18,12 +18,12 @@ final class DetectUsers extends MethodForm
 
 	public function formValidated(GDT_Form $form)
 	{
-		$table = User::table();
+		$table = GDO_User::table();
 		$result = $table->select()->where('user_country IS NULL AND user_register_ip IS NOT NULL')->exec();
 		$rows = 0;
 		while ($user = $table->fetch($result))
 		{
-			if ($country = IPCountry::detect($user->getRegisterIP()))
+			if ($country = GDO_IPCountry::detect($user->getRegisterIP()))
 			{
 				$user->saveValue('user_country', $country);
 				$rows++;

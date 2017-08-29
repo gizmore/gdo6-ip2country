@@ -5,7 +5,7 @@ use GDO\Form\GDT_AntiCSRF;
 use GDO\Form\GDT_Form;
 use GDO\Form\GDT_Submit;
 use GDO\Form\MethodForm;
-use GDO\IP2Country\IPCountry;
+use GDO\IP2Country\GDO_IPCountry;
 use GDO\IP2Country\Module_IP2Country;
 use GDO\Admin\MethodAdmin;
 
@@ -29,13 +29,13 @@ final class InstallIP2C extends MethodForm
 
 	public function formValidated(GDT_Form $form)
 	{
-		IPCountry::table()->truncate();
+		GDO_IPCountry::table()->truncate();
 		$module = Module_IP2Country::instance();
 		$filename = $module->filePath('data/IpToCountry.csv');
 		$fh = fopen($filename, 'r');
 		$noCountry = ['ZZ','EU', 'AP', 'BX', 'EF', 'EM', 'EP', 'EV', 'GC', 'IB', 'OA', 'WO'];
 		$bulkData = [];
-		$fields = IPCountry::table()->getGDOColumns(['ipc_lo', 'ipc_hi', 'ip_country']);
+		$fields = GDO_IPCountry::table()->getGDOColumns(['ipc_lo', 'ipc_hi', 'ip_country']);
 		while ($row = fgetcsv($fh))
 		{
 			list($lo, $hi, $registrar, $timestamp, $iso2, $iso3, $country) = $row;
@@ -45,13 +45,13 @@ final class InstallIP2C extends MethodForm
 			}
 			if (count($bulkData) >= 500)
 			{
-			    IPCountry::bulkReplace($fields, $bulkData);
+			    GDO_IPCountry::bulkReplace($fields, $bulkData);
 			    $bulkData = [];
 			}
 		}
 		
-		IPCountry::bulkReplace($fields, $bulkData);
-		$rows = IPCountry::table()->countWhere();
+		GDO_IPCountry::bulkReplace($fields, $bulkData);
+		$rows = GDO_IPCountry::table()->countWhere();
 		
 		return $this->message('msg_ip2country_installed', [$rows]);
 	}
