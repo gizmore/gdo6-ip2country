@@ -2,8 +2,8 @@
 namespace GDO\IP2Country;
 
 use GDO\Core\Module;
-use GDO\Type\GDO_Checkbox;
-use GDO\UI\GDO_Link;
+use GDO\Type\GDT_Checkbox;
+use GDO\UI\GDT_Link;
 use GDO\User\User;
 /**
  * IP2Country detection.
@@ -30,8 +30,8 @@ final class Module_IP2Country extends Module
 	public function getConfig()
 	{
 		return array(
-			GDO_Checkbox::make('autodetect_signup')->initial('1'),
-			GDO_Link::make('detect_users')->href(href('IP2Country', 'DetectUsers')),
+			GDT_Checkbox::make('autodetect_signup')->initial('1'),
+			GDT_Link::make('detect_users')->href(href('IP2Country', 'DetectUsers')),
 		);
 	}
 	public function cfgAutodetectSignup() { return $this->getConfigValue('autodetect_signup'); }

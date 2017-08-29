@@ -2,10 +2,10 @@
 namespace GDO\IP2Country;
 
 use GDO\DB\GDO;
-use GDO\Type\GDO_Int;
+use GDO\Type\GDT_Int;
 use GDO\Country\Country;
-use GDO\Country\GDO_Country;
-use GDO\DB\GDO_Index;
+use GDO\Country\GDT_Country;
+use GDO\DB\GDT_Index;
 /**
  * IPCountry GDO table
  * 
@@ -26,10 +26,10 @@ final class IPCountry extends GDO
 	public function gdoColumns()
 	{
 		return array(
-			GDO_Int::make('ipc_lo')->unsigned()->notNull(),
-		    GDO_Int::make('ipc_hi')->unsigned()->notNull(),
-		    GDO_Country::make('ip_country')->notNull(),
-		    GDO_Index::make()->indexColumns('ipc_lo', 'ipc_hi'),
+			GDT_Int::make('ipc_lo')->unsigned()->notNull(),
+		    GDT_Int::make('ipc_hi')->unsigned()->notNull(),
+		    GDT_Country::make('ip_country')->notNull(),
+		    GDT_Index::make()->indexColumns('ipc_lo', 'ipc_hi'),
 		);
 	}
 	
