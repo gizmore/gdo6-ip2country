@@ -1,7 +1,7 @@
 <?php
 namespace GDO\IP2Country;
 
-use GDO\DB\GDO;
+use GDO\Core\GDO;
 use GDO\Type\GDT_Int;
 use GDO\Country\GDO_Country;
 use GDO\Country\GDT_Country;
