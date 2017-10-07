@@ -2,7 +2,7 @@
 namespace GDO\IP2Country;
 
 use GDO\Core\GDO;
-use GDO\Type\GDT_Int;
+use GDO\DB\GDT_UInt;
 use GDO\Country\GDO_Country;
 use GDO\Country\GDT_Country;
 use GDO\DB\GDT_Index;
@@ -11,10 +11,8 @@ use GDO\DB\GDT_Index;
  * 
  * @author gizmore
  * @since 3.0
- * @version 5.0
- *
- * @see Country
- * 
+ * @version 6.05
+ * @see GDO_Country
  */
 final class GDO_IPCountry extends GDO
 {
@@ -26,8 +24,8 @@ final class GDO_IPCountry extends GDO
 	public function gdoColumns()
 	{
 		return array(
-			GDT_Int::make('ipc_lo')->unsigned()->notNull(),
-		    GDT_Int::make('ipc_hi')->unsigned()->notNull(),
+			GDT_UInt::make('ipc_lo')->notNull(),
+		    GDT_UInt::make('ipc_hi')->notNull(),
 		    GDT_Country::make('ip_country')->notNull(),
 		    GDT_Index::make()->indexColumns('ipc_lo', 'ipc_hi'),
 		);
@@ -41,7 +39,7 @@ final class GDO_IPCountry extends GDO
 	 * @param string $ip
 	 * @return string country iso
 	 */
-	public static function detectISO(string $ip)
+	public static function detectISO($ip)
 	{
 		if ($ip = ip2long($ip))
 		{
@@ -54,7 +52,7 @@ final class GDO_IPCountry extends GDO
 	 * @param string $ip
 	 * @return GDO_Country
 	 */
-	public static function detect(string $ip)
+	public static function detect($ip)
 	{
 		if ($iso = self::detectISO($ip))
 		{

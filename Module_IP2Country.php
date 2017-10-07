@@ -2,7 +2,7 @@
 namespace GDO\IP2Country;
 
 use GDO\Core\GDO_Module;
-use GDO\Type\GDT_Checkbox;
+use GDO\DB\GDT_Checkbox;
 use GDO\UI\GDT_Link;
 use GDO\User\GDO_User;
 /**
