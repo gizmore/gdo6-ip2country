@@ -7,7 +7,7 @@ use GDO\Form\GDT_Submit;
 use GDO\Form\MethodForm;
 use GDO\IP2Country\GDO_IPCountry;
 use GDO\IP2Country\Module_IP2Country;
-use GDO\Admin\MethodAdmin;
+use GDO\Core\MethodAdmin;
 
 final class InstallIP2C extends MethodForm
 {
