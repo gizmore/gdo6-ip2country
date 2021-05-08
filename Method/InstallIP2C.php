@@ -17,7 +17,7 @@ final class InstallIP2C extends MethodForm
     
     public function execute()
     {
-        return $this->renderNavBar('IP2Country')->add(parent::execute());
+        return $this->renderNavBar('IP2Country')->addField(parent::execute());
     }
     
 	public function createForm(GDT_Form $form)
