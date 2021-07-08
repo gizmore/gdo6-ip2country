@@ -39,7 +39,7 @@ final class Module_IP2Country extends GDO_Module
 	#############
 	### Hooks ###
 	#############
-	public function hookUserActivated(GDO_User $user)
+	public function hookUserActivated(GDO_User $user, GDO_UserActivation $activation=null)
 	{
 		if ($this->cfgAutodetectSignup())
 		{
